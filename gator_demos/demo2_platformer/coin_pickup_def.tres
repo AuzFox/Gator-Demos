@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://addons/gator/src/gator_entity_definition.gd" type="Script" id=1]
+[ext_resource path="res://demo2_platformer/coin.tscn" type="PackedScene" id=2]
+
+[resource]
+script = ExtResource( 1 )
+entity_tag = "coin-pickup"
+entity_type = 0
+scene = ExtResource( 2 )
+properties = {
+"type": 1
+}

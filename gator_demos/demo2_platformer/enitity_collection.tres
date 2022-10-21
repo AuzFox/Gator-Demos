@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://addons/gator/src/gator_entity_collection.gd" type="Script" id=1]
+[ext_resource path="res://demo2_platformer/coin_pickup_def.tres" type="Resource" id=2]
+
+[resource]
+script = ExtResource( 1 )
+entity_definitions = [ ExtResource( 2 ) ]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/crocotile_tileset.png-2529ddbb18fbd46a30ceedf2a4d2c8c1.stex"
+path="res://.import/coin_spritesheet.png-e91052677412afedc8f6cead2d0c205a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://demo2_platformer/crocotile_assets/crocotile_tileset.png"
-dest_files=[ "res://.import/crocotile_tileset.png-2529ddbb18fbd46a30ceedf2a4d2c8c1.stex" ]
+source_file="res://demo2_platformer/coin_spritesheet.png"
+dest_files=[ "res://.import/coin_spritesheet.png-e91052677412afedc8f6cead2d0c205a.stex" ]
 
 [params]
 
