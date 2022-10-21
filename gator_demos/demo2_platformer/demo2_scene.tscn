@@ -3,8 +3,8 @@
 [ext_resource path="res://demo2_platformer/demo2_mat.material" type="Material" id=1]
 [ext_resource path="res://addons/gator/src/gator_scene.gd" type="Script" id=2]
 [ext_resource path="res://demo2_platformer/enitity_collection.tres" type="Resource" id=3]
-[ext_resource path="res://demo2_platformer/coin.gd" type="Script" id=4]
-[ext_resource path="res://demo2_platformer/coin_spritesheet.png" type="Texture" id=5]
+[ext_resource path="res://demo2_platformer/player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://demo2_platformer/hud.gd" type="Script" id=5]
 [ext_resource path="res://demo2_platformer/coin.tscn" type="PackedScene" id=6]
 
 [sub_resource type="ArrayMesh" id=1]
@@ -44,35 +44,52 @@ script = ExtResource( 2 )
 data_file = "res://demo2_platformer/crocotile_assets/crocotile_scene_data.txt"
 entity_collection = ExtResource( 3 )
 
-[node name="yellow_coin_1" type="Sprite3D" parent="GatorScene" instance=ExtResource( 6 )]
+[node name="yellow_coin_1" parent="GatorScene" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2.5, -2.5 )
-pixel_size = 0.0625
-texture = ExtResource( 5 )
-hframes = 2
-script = ExtResource( 4 )
 properties = {
 "type": 1
 }
 
-[node name="red_coin" type="Sprite3D" parent="GatorScene" instance=ExtResource( 6 )]
+[node name="red_coin" parent="GatorScene" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -2.5 )
-pixel_size = 0.0625
-texture = ExtResource( 5 )
-hframes = 2
-script = ExtResource( 4 )
 properties = {
 "type": 2.0
 }
 
-[node name="yellow_coin_2" type="Sprite3D" parent="GatorScene" instance=ExtResource( 6 )]
+[node name="yellow_coin_2" parent="GatorScene" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2.5, -2.5 )
-pixel_size = 0.0625
-texture = ExtResource( 5 )
-hframes = 2
-script = ExtResource( 4 )
 properties = {
 "type": 1
 }
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.899253, 0.43743, 0, -0.43743, 0.899253, 0, 4.50988, 7.08999 )
+
+[node name="player" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.561, 1.5 )
+
+[node name="hud" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+
+[node name="VSplitContainer" type="VSplitContainer" parent="hud"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -74.0
+margin_right = 199.0
+
+[node name="coins_label" type="Label" parent="hud/VSplitContainer"]
+margin_right = 199.0
+margin_bottom = 14.0
+text = "Coins: 0"
+
+[node name="controls_label" type="Label" parent="hud/VSplitContainer"]
+margin_top = 26.0
+margin_right = 199.0
+margin_bottom = 74.0
+text = "Grab the coins!
+ARROW KEYS or WASD to move
+Z or SPACE to jump"
+
+[connection signal="coin_collected" from="player" to="hud" method="_on_coin_collected"]
