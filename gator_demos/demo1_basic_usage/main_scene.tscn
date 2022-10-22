@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://addons/gator/src/gator_scene.gd" type="Script" id=1]
 [ext_resource path="res://demo1_basic_usage/entity_collection.tres" type="Resource" id=2]
 [ext_resource path="res://demo1_basic_usage/entity1.tscn" type="PackedScene" id=3]
-[ext_resource path="res://demo1_basic_usage/entity1.gd" type="Script" id=4]
-[ext_resource path="res://icon.png" type="Texture" id=5]
 
 [node name="Spatial" type="Spatial"]
 
@@ -13,6 +11,9 @@ __meta__ = {
 "_editor_description_": "Gator Demo 1: Basic Usage
 
 This demo demonstrates how to set up a simple scene with the plugin.
+
+main_scene.tscn is fully configured with 2 simple entity types, one that spawns a scene when building, and one that spawns a blank Spatial node.
+All Crocotile3D assets are present in the demo1_basic_usage/crocotile_assets/ directory, which is hidden in Godot to prevent importing.
 
 [ 0. Getting Started ]
 
@@ -69,15 +70,29 @@ GatorScene nodes have the following properties:
 
 [ 4. Creating the Crocotile3D Scene ]
 
-...
+In the Crocotile3D scene, at least 1 object and instance should be created.
+To associate an object with a Gator entity type, follow these steps:
+- In Crocotile3D's Scene panel, right-click the object (not the instance) and select \"Properties\".
+- Under the \"Custom\" section, create an Object property of type String with the name \"gt-tag\".
+	- For the gt-tag value, enter the Entity Tag of the desired Gator entity.
+- Create an Instance property for each property that the Gator Entity defines.
+	- Properties of type int and float should be set to the Number type.
+	- Any other type must be set to the String type, and formatted according to str2var() parsing.
+
+Any Crocotile objects that lack a \"gt-tag\" property will be implicitly ignored by Gator.
+Objects can also be explicitly ignored by giving them a \"gt-ignore\" Object property.
+
+Finally, set the desired values for any properties on the instances in the scene.
 
 [ 5. Exporting the Crocotile3D Scene Data ]
 
-...
+When all objects and instances have been configured, go to the Scene tab and select \"Export Scene Data\" from the Scene menu.
+Place the resulting file wherever you like, and be sure to set the GatorScene's Data File property with the path to it.
 
 [ Building ]
 
-..."
+With all other steps completed, select the configured GatorScene node in Godot to reveal the \"Build\" button in the 3D scene toolbar.
+Click Build to begin the build proccess, any errors will be printed to the Output console."
 }
 
 [node name="GatorScene" type="Spatial" parent="."]
@@ -85,10 +100,8 @@ script = ExtResource( 1 )
 data_file = "res://demo1_basic_usage/crocotile_assets/crocotile_object_data.txt"
 entity_collection = ExtResource( 2 )
 
-[node name="Entity1_Instance" type="Sprite3D" parent="GatorScene" instance=ExtResource( 3 )]
+[node name="Entity1_Instance" parent="GatorScene" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0 )
-texture = ExtResource( 5 )
-script = ExtResource( 4 )
 properties = {
 "property": "not the default!"
 }

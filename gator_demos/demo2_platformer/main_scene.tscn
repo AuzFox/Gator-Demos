@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://demo2_platformer/demo2_mat.material" type="Material" id=1]
-[ext_resource path="res://addons/gator/src/gator_scene.gd" type="Script" id=2]
-[ext_resource path="res://demo2_platformer/enitity_collection.tres" type="Resource" id=3]
-[ext_resource path="res://demo2_platformer/player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://demo2_platformer/hud.gd" type="Script" id=5]
-[ext_resource path="res://demo2_platformer/coin.tscn" type="PackedScene" id=6]
+[ext_resource path="res://demo2_platformer/coin.tscn" type="PackedScene" id=2]
+[ext_resource path="res://demo2_platformer/hud.gd" type="Script" id=3]
+[ext_resource path="res://addons/gator/src/gator_scene.gd" type="Script" id=4]
+[ext_resource path="res://demo2_platformer/enitity_collection.tres" type="Resource" id=5]
+[ext_resource path="res://demo2_platformer/player.tscn" type="PackedScene" id=6]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "default_mesh"
@@ -28,6 +28,9 @@ data = PoolVector3Array( -0.25, 0.5, 4.9999, -0.25, 8.5, 4.9999, -9.25, 8.5, 4.9
 [node name="demo2_mesh" type="Spatial"]
 
 [node name="READ MY EDITOR DESC" type="Node" parent="."]
+__meta__ = {
+"_editor_description_": "TODO"
+}
 
 [node name="level_mesh" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.75, -0.5, -1.9998 )
@@ -40,23 +43,23 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.75, -0.5, -1.9998 )
 shape = SubResource( 2 )
 
 [node name="GatorScene" type="Spatial" parent="."]
-script = ExtResource( 2 )
+script = ExtResource( 4 )
 data_file = "res://demo2_platformer/crocotile_assets/crocotile_scene_data.txt"
-entity_collection = ExtResource( 3 )
+entity_collection = ExtResource( 5 )
 
-[node name="yellow_coin_1" parent="GatorScene" instance=ExtResource( 6 )]
+[node name="yellow_coin_1" parent="GatorScene" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2.5, -2.5 )
 properties = {
 "type": 1
 }
 
-[node name="red_coin" parent="GatorScene" instance=ExtResource( 6 )]
+[node name="red_coin" parent="GatorScene" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -2.5 )
 properties = {
 "type": 2.0
 }
 
-[node name="yellow_coin_2" parent="GatorScene" instance=ExtResource( 6 )]
+[node name="yellow_coin_2" parent="GatorScene" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 2.5, -2.5 )
 properties = {
 "type": 1
@@ -65,13 +68,13 @@ properties = {
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.899253, 0.43743, 0, -0.43743, 0.899253, 0, 4.50988, 7.08999 )
 
-[node name="player" parent="." instance=ExtResource( 4 )]
+[node name="player" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.561, 1.5 )
 
 [node name="hud" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 5 )
+script = ExtResource( 3 )
 
 [node name="VSplitContainer" type="VSplitContainer" parent="hud"]
 anchor_top = 1.0
