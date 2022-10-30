@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "GatorScene",
 "language": "GDScript",
 "path": "res://addons/gator/src/gator_scene.gd"
+}, {
+"base": "Reference",
+"class": "GatorUtil",
+"language": "GDScript",
+"path": "res://addons/gator/src/gator_util.gd"
 } ]
 _global_script_class_icons={
 "GatorEntityCollection": "",
 "GatorEntityDefinition": "",
-"GatorScene": ""
+"GatorScene": "",
+"GatorUtil": ""
 }
 
 [application]

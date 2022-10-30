@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource( 1 )
 entity_tag = "entity1"
-entity_type = 0
 scene = ExtResource( 2 )
 properties = {
+"property": "default value"
 }

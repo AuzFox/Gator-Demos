@@ -6,7 +6,6 @@
 [resource]
 script = ExtResource( 1 )
 entity_tag = "coin-pickup"
-entity_type = 0
 scene = ExtResource( 2 )
 properties = {
 "type": 1

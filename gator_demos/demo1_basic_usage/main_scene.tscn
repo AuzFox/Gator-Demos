@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://addons/gator/src/gator_scene.gd" type="Script" id=1]
 [ext_resource path="res://demo1_basic_usage/entity_collection.tres" type="Resource" id=2]
-[ext_resource path="res://demo1_basic_usage/entity1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://demo1_basic_usage/entity1.gd" type="Script" id=3]
+[ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://demo1_basic_usage/entity1.tscn" type="PackedScene" id=5]
 
 [node name="Spatial" type="Spatial"]
 
@@ -15,7 +17,7 @@ This demo demonstrates how to set up a simple scene with the plugin.
 main_scene.tscn is fully configured with 2 simple entity types, one that spawns a scene when building, and one that spawns a blank Spatial node.
 All Crocotile3D assets are present in the demo1_basic_usage/crocotile_assets/ directory, which is hidden in Godot to prevent importing.
 
-[ 0. Getting Started ]
+[ Getting Started ]
 
 To use Gator to instance Godot scenes, a few things must be set up first.
 Each of the following steps will be elaborated upon in their own sections.
@@ -92,7 +94,17 @@ Place the resulting file wherever you like, and be sure to set the GatorScene's 
 [ Building ]
 
 With all other steps completed, select the configured GatorScene node in Godot to reveal the \"Build\" button in the 3D scene toolbar.
-Click Build to begin the build proccess, any errors will be printed to the Output console."
+Click Build to begin the build proccess, any errors will be printed to the Output console.
+
+[ Using Imported Object Data in Godot Scripts ]
+
+If the root node of the Godot scene instanced by an entity has a script attached, certain variables will automatically be assigned
+data from that entity's instance if they are declared.
+the following fields will be assigned:
+- 'properties': Will be assigned a Dictionary containing all instance property values.
+- 'points': Will be assigned a Dictionary containing all of the points defined by the object as local space Vector3 values.
+
+Note that an object's points are defined per C3D object, and not per instance. All instances of an object will contain the same set of points."
 }
 
 [node name="GatorScene" type="Spatial" parent="."]
@@ -100,11 +112,12 @@ script = ExtResource( 1 )
 data_file = "res://demo1_basic_usage/crocotile_assets/crocotile_object_data.txt"
 entity_collection = ExtResource( 2 )
 
-[node name="Entity1_Instance" parent="GatorScene" instance=ExtResource( 3 )]
+[node name="Entity1_Instance" type="Sprite3D" parent="GatorScene" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0 )
+texture = ExtResource( 4 )
+script = ExtResource( 3 )
 properties = {
 "property": "not the default!"
 }
 
 [node name="Entity2_Instance" type="Spatial" parent="GatorScene"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0 )
